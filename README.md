@@ -77,5 +77,5 @@ This project is licensed under the MIT License.
 Feel free to open an issue or submit a pull request!
 
 ## Contact
-For any inquiries, reach out via [your contact email or social handle].
+For any inquiries, reach out via email "edetanb@gmail.com".
 
