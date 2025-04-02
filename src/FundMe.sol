@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 
-// Note: The AggregatorV3Interface might be at a different location than what was in the video!
+
 import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import {PriceConverter} from "./PriceConverter.sol";
 
@@ -13,8 +13,8 @@ contract FundMe {
     mapping(address => uint256) private s_addressToAmountFunded;
     address[] private s_funders;
 
-    // Could we make this constant?  /* hint: no! We should make it immutable! */
-    address private /* immutable */ i_owner;
+ 
+    address private immutable i_owner;
     uint256 public constant MINIMUM_USD = 5e18;
     AggregatorV3Interface private s_priceFeed;
 
@@ -25,7 +25,7 @@ contract FundMe {
 
     function fund() public payable {
         require(msg.value.getConversionRate(s_priceFeed) >= MINIMUM_USD, "You need to spend more ETH!");
-        // require(PriceConverter.getConversionRate(msg.value) >= MINIMUM_USD, "You need to spend more ETH!");
+        
         s_addressToAmountFunded[msg.sender] += msg.value;
         s_funders.push(msg.sender);
     }
@@ -101,11 +101,3 @@ contract FundMe {
     }
 }
 
-// Concepts we didn't cover yet (will cover in later sections)
-// 1. Enum
-// 2. Events
-// 3. Try / Catch
-// 4. Function Selector
-// 5. abi.encode / decode
-// 6. Hash with keccak256
-// 7. Yul / Assembly
