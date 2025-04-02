@@ -1,66 +1,81 @@
-## Foundry
+# Crowdfunding Smart Contract
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This project is a decentralized crowdfunding smart contract built using Solidity and Foundry. It allows users to create and contribute to crowdfunding campaigns on the Ethereum network. The contract includes deployment scripts and a helper configuration to facilitate deployment on multiple Ethereum chains.
 
-Foundry consists of:
+## Features
+- Chainlink Price Feeds for real-time ETH/USD conversion
+- Minimum contribution threshold (5 USD equivalent in ETH)
+- Secure withdrawal functionality for contract owner
+- Optimized gas usage with cheaper withdrawal function
+- Comprehensive test suite (unit + integration tests)
+- Multi-chain deployment support
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## Tech Stack
+- **Solidity**: Smart contract language
+- **Foundry**: Smart contract development framework
+- **Ethereum**: Blockchain network
+- **Chainlink Oracles**: For price feed integration
 
-## Documentation
+## Setup & Installation
 
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
+### Prerequisites
+Ensure you have Foundry installed. If not, install it with:
+```sh
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
 ```
 
-### Test
-
-```shell
-$ forge test
+### Clone the Repository
+```sh
+git clone https://github.com/emperorbona/fundme-crowdfunding-contract.git
+cd crowdfunding-contract
 ```
 
-### Format
-
-```shell
-$ forge fmt
+### Install Dependencies
+```sh
+forge install
 ```
 
-### Gas Snapshots
+## Running Tests
+This project includes both **unit tests** and **integration tests** to ensure contract reliability.
 
-```shell
-$ forge snapshot
+Run all tests with:
+```sh
+forge test
 ```
 
-### Anvil
-
-```shell
-$ anvil
+Run a specific test:
+```sh
+forge test --match-test testFunctionName
 ```
 
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+## Deployment
+### Local Deployment
+```sh
+forge script script/Deploy.s.sol --fork-url http://127.0.0.1:8545 --broadcast
 ```
 
-### Cast
-
-```shell
-$ cast <subcommand>
+### Deploying to a Live Network
+Modify the `helper-config.s.sol` file with the target network configuration, then deploy:
+```sh
+forge script script/Deploy.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
 ```
+Replace `$RPC_URL` and `$PRIVATE_KEY` with your actual RPC endpoint and private key.
 
-### Help
+## Smart Contract Overview
+### FundMe.sol
+This contract allows users to fund campaigns using ETH. Key functionalities:
+- Accepts ETH contributions
+- Converts ETH to USD using Chainlink price feeds
+- Only allows the owner to withdraw funds
+- Includes `fallback` and `receive` functions to handle direct ETH transfers
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+## License
+This project is licensed under the MIT License.
+
+## Contributing
+Feel free to open an issue or submit a pull request!
+
+## Contact
+For any inquiries, reach out via [your contact email or social handle].
+
